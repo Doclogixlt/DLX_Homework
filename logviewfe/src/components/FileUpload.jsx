@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import "./styles.css";
 
-const FileInput = () => {
+const FileUpload = () => {
   const [file, setFile] = useState();
 
   function handleChange(event) {
@@ -9,16 +10,16 @@ const FileInput = () => {
 
   function handleSubmit(event) {
     event.preventDefault();
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     const formData = new FormData();
     formData.append("file", file);
 
     fetch("https://localhost:7025/log/upload", {
       method: "POST",
       body: formData,
-      headers:{
-        'Authorization': `Bearer ${token}`
-      }
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     })
       .then((response) => response.json())
       .then((data) => {
@@ -30,7 +31,7 @@ const FileInput = () => {
   }
 
   return (
-    <div className="App">
+    <div className="container">
       <form onSubmit={handleSubmit}>
         <h1>React File Upload</h1>
         <input type="file" name="file" onChange={handleChange} />
@@ -40,4 +41,4 @@ const FileInput = () => {
   );
 };
 
-export default FileInput;
+export default FileUpload;

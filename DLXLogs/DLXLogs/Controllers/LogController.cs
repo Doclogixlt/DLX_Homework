@@ -1,4 +1,5 @@
 ﻿using DataAccess.Models.LogModels;
+using DataAccess.Models.RequestModels;
 using DLXLogsBL.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -29,10 +30,10 @@ namespace DLXLogs.Controllers
         }
 
         [Authorize]
-        [HttpGet(Name = "get")]
-        public async Task<IActionResult> Get([FromQuery]LogFilter filter, [FromQuery] Pagination pagination)
+        [HttpPost(Name = "get")]
+        public async Task<IActionResult> Get([FromQuery]LogRequestModel parameters)
         {
-            var logs = await _logService.GetLogs(filter, pagination);
+            var logs = await _logService.GetLogs(parameters.LogFilter, parameters.Pagination);
             return Ok(logs);
         }
     }

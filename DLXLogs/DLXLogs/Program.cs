@@ -1,4 +1,5 @@
 using DataAccess;
+using DLXLogs.Extensions;
 using DLXLogsBL.Contracts;
 using DLXLogsBL.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -83,6 +84,8 @@ builder.Services.AddCors(options =>
 });
 
 var app = builder.Build();
+
+app.ApplyMigrations();
 
 app.UseCors();
 
